@@ -78,59 +78,51 @@ function showStatus(message) {
 
 // ==========================================
 // GET CAPTCHA
-// ==========================================
+// ======================================
+
+// ======================================
+// GET CAPTCHA
+// ======================================
 
 async function loadCaptcha() {
 
+    const message =
+        document.getElementById("message");
+
+    const captchaImage =
+        document.getElementById("captchaImage");
+
+
+    // Reset
+
     captchaId = null;
 
+    captchaImage.removeAttribute("src");
 
-    captchaCodeInput.value = "";
-
-
-    captchaImage.removeAttribute(
-        "src"
-    );
-
-
-    showStatus(
-        "Getting a new CAPTCHA..."
-    );
+    message.textContent =
+        "Getting CAPTCHA...";
 
 
     try {
 
-
         console.log(
-            "GET:",
-            CAPTCHA_API
+            "STEP 1: Requesting CAPTCHA"
         );
 
 
         const response =
             await fetch(
-                CAPTCHA_API,
+                "https://viberschat.space:2053/api/captcha",
                 {
                     method: "GET",
-
                     cache: "no-store"
                 }
             );
 
 
         console.log(
-            "CAPTCHA HTTP status:",
+            "HTTP:",
             response.status
-        );
-
-
-        const responseText =
-            await response.text();
-
-
-        console.log(
-            "CAPTCHA response:",
-            responseText
         );
 
 
@@ -138,21 +130,24 @@ async function loadCaptcha() {
 
             throw new Error(
                 "HTTP " +
-                response.status +
-                "\n" +
-                responseText
+                response.status
             );
 
         }
 
 
+        // Read JSON
+
         const data =
-            JSON.parse(
-                responseText
-            );
+            await response.json();
 
 
-        // Check API status
+        console.log(
+            "STEP 2: CAPTCHA response"
+        );
+
+        console.log(data);
+
 
         if (
             data.status !==
@@ -160,16 +155,109 @@ async function loadCaptcha() {
         ) {
 
             throw new Error(
-                "CAPTCHA API error:\n" +
-                JSON.stringify(
-                    data,
-                    null,
-                    2
-                )
+                "CAPTCHA API returned failure."
             );
 
         }
 
+
+        // ==================================
+        // STEP 3
+        // SAVE CAPTCHA ID
+        // ==================================
+
+        captchaId =
+            data.captcha_id;
+
+
+        console.log(
+            "CAPTCHA ID:",
+            captchaId
+        );
+
+
+        // ==================================
+        // STEP 4
+        // CREATE WORKING IMAGE URL
+        // ==================================
+
+        const imageUrl =
+            "https://www.viberschat.space:8443" +
+            "/api/captcha/images/" +
+            captchaId +
+            ".png";
+
+
+        console.log(
+            "CAPTCHA IMAGE URL:"
+        );
+
+        console.log(
+            imageUrl
+        );
+
+
+        // ==================================
+        // STEP 5
+        // DISPLAY IMAGE
+        // ==================================
+
+        captchaImage.onload =
+            function() {
+
+                console.log(
+                    "STEP 6: CAPTCHA image loaded"
+                );
+
+
+                message.textContent =
+                    "Enter the CAPTCHA.";
+
+            };
+
+
+        captchaImage.onerror =
+            function() {
+
+                console.error(
+                    "STEP 6 FAILED:"
+                );
+
+                console.error(
+                    imageUrl
+                );
+
+
+                message.textContent =
+                    "CAPTCHA image failed to load.";
+
+            };
+
+
+        captchaImage.src =
+            imageUrl;
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "CAPTCHA ERROR:"
+        );
+
+        console.error(error);
+
+
+        message.textContent =
+            "CAPTCHA error: " +
+            error.message;
+
+    }
+
+}
+``
+        
 
         // ==================================
         // SAVE CAPTCHA ID
