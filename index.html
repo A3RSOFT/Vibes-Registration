@@ -10,7 +10,9 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Viber's Chat Registration</title>
+    <title>
+        Viber's Chat Registration
+    </title>
 
     <link
         rel="stylesheet"
@@ -19,28 +21,73 @@
 
 </head>
 
+
 <body>
 
-    <div class="registration-box">
+
+<div class="container">
+
+
+    <div class="register-box">
+
 
         <h1>
             Viber's Chat
         </h1>
 
-        <p>
+
+        <p class="subtitle">
             Create your account
         </p>
 
+
+        <!-- ========================= -->
+        <!-- USERNAME -->
+        <!-- ========================= -->
+
+        <label for="username">
+            Username
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter username"
+            autocomplete="username"
+        >
+
+
+        <!-- ========================= -->
+        <!-- PASSWORD -->
+        <!-- ========================= -->
+
+        <label for="password">
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            autocomplete="new-password"
+        >
+
+
+        <!-- ========================= -->
+        <!-- CAPTCHA -->
+        <!-- ========================= -->
 
         <label>
             CAPTCHA
         </label>
 
 
-        <div class="captcha-container">
+        <div class="captcha-area">
+
 
             <img
                 id="captchaImage"
+                src=""
                 alt="CAPTCHA"
             >
 
@@ -48,29 +95,71 @@
             <button
                 type="button"
                 id="refreshCaptcha"
+                title="Get another CAPTCHA"
             >
                 ↻
             </button>
 
+
         </div>
+
+
+        <!-- ========================= -->
+        <!-- CAPTCHA CODE -->
+        <!-- ========================= -->
+
+        <label for="captchaCode">
+            Enter CAPTCHA
+        </label>
 
 
         <input
-            id="captchaCode"
             type="text"
-            placeholder="Enter CAPTCHA"
+            id="captchaCode"
+            placeholder="Type CAPTCHA"
+            autocomplete="off"
         >
 
 
-        <div id="message">
-            Loading...
+        <!-- ========================= -->
+        <!-- REGISTER -->
+        <!-- ========================= -->
+
+        <button
+            type="button"
+            id="registerButton"
+        >
+            REGISTER
+        </button>
+
+
+        <!-- ========================= -->
+        <!-- STATUS -->
+        <!-- ========================= -->
+
+        <div class="status-title">
+            Status
         </div>
+
+
+        <div
+            id="status"
+            class="status"
+        >
+            Waiting...
+        </div>
+
 
     </div>
 
 
-    <script src="app.js"></script>
+</div>
+
+
+<script src="app.js"></script>
+
 
 </body>
 
 </html>
+
