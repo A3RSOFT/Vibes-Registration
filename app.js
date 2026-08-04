@@ -80,10 +80,6 @@ function showStatus(message) {
 // GET CAPTCHA
 // ======================================
 
-// ======================================
-// GET CAPTCHA
-// ======================================
-
 async function loadCaptcha() {
 
     const message =
@@ -256,8 +252,7 @@ async function loadCaptcha() {
     }
 
 }
-``
-        
+    
 
         // ==================================
         // SAVE CAPTCHA ID
