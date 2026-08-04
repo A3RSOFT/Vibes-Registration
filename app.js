@@ -1,4 +1,3 @@
-
 const CAPTCHA_API =
     "http://viberschat.space:2052/api/captcha";
 
@@ -6,87 +5,147 @@ let captchaId = null;
 
 
 // ======================================
-// GET CAPTCHA
+// LOAD CAPTCHA
 // ======================================
 
 async function loadCaptcha() {
 
+    const image =
+        document.getElementById("captchaImage");
+
     const message =
         document.getElementById("message");
 
-    const captchaImage =
-        document.getElementById("captchaImage");
 
     message.textContent =
-        "Loading CAPTCHA...";
+        "Connecting to CAPTCHA server...";
+
+
+    image.removeAttribute("src");
+
 
     try {
 
+        console.log(
+            "Requesting:",
+            CAPTCHA_API
+        );
+
+
         const response =
-            await fetch(CAPTCHA_API);
+            await fetch(
+                CAPTCHA_API,
+                {
+                    method: "GET",
+
+                    cache: "no-store"
+                }
+            );
+
+
+        console.log(
+            "HTTP status:",
+            response.status
+        );
+
+
+        console.log(
+            "Final URL:",
+            response.url
+        );
+
+
+        const text =
+            await response.text();
+
+
+        console.log(
+            "Server response:",
+            text
+        );
+
 
         if (!response.ok) {
 
             throw new Error(
-                "HTTP error: " +
-                response.status
+                "HTTP " +
+                response.status +
+                ": " +
+                text
             );
+
         }
+
 
         const data =
-            await response.json();
-
-        console.log("CAPTCHA response:", data);
+            JSON.parse(text);
 
 
-        if (data.status !== "success") {
+        if (
+            data.status !==
+            "success"
+        ) {
 
             throw new Error(
-                "CAPTCHA request failed."
+                "API returned: " +
+                text
             );
+
         }
 
 
-        // Save CAPTCHA ID
         captchaId =
             data.captcha_id;
 
 
-        // Display CAPTCHA image
-        captchaImage.src =
-            data.captcha_url;
-
-
-        message.textContent = "";
-
         console.log(
-            "Captcha ID:",
+            "CAPTCHA ID:",
             captchaId
         );
 
+
         console.log(
-            "Captcha URL:",
+            "CAPTCHA URL:",
             data.captcha_url
         );
 
-    }
 
+        /*
+         * Try to display the image returned
+         * by the API.
+         */
+
+        image.src =
+            data.captcha_url;
+
+
+        message.textContent =
+            "CAPTCHA loaded.";
+
+
+    }
     catch (error) {
 
         console.error(
-            "CAPTCHA error:",
+            "CAPTCHA ERROR:",
             error
         );
 
-        message.textContent =
-            "Unable to load CAPTCHA.";
+
+        message.innerHTML =
+            "<b>CAPTCHA failed.</b><br><br>" +
+            error.message +
+            "<br><br>" +
+            "Open browser Developer Console " +
+            "for the complete error.";
 
     }
+
 }
 
 
 // ======================================
-// REFRESH CAPTCHA
+// REFRESH
 // ======================================
 
 document
@@ -98,144 +157,7 @@ document
 
 
 // ======================================
-// REGISTER
-// ======================================
-
-document
-    .getElementById("registerForm")
-    .addEventListener(
-        "submit",
-        async function(event) {
-
-            event.preventDefault();
-
-
-            const username =
-                document
-                    .getElementById("username")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-
-
-            const captchaCode =
-                document
-                    .getElementById("captchaCode")
-                    .value
-                    .trim();
-
-
-            const message =
-                document
-                    .getElementById("message");
-
-
-            if (!captchaId) {
-
-                message.textContent =
-                    "Please wait for CAPTCHA.";
-
-                return;
-            }
-
-
-            if (!captchaCode) {
-
-                message.textContent =
-                    "Please enter the CAPTCHA.";
-
-                return;
-            }
-
-
-            const registerData = {
-
-                username: username,
-
-                password: password,
-
-                version: "1.8.5",
-
-                imei:
-                    "1188d7271ef144a2ae72e9d9c51111c8",
-
-                captcha_id:
-                    captchaId,
-
-                captcha_code:
-                    captchaCode
-
-            };
-
-
-            console.log(
-                "Registration data:",
-                registerData
-            );
-
-
-            message.textContent =
-                "Registering...";
-
-
-            try {
-
-                const response =
-                    await fetch(
-                        "http://viberschat.space:2052/api/register",
-                        {
-                            method: "POST",
-
-                            headers: {
-                                "Content-Type":
-                                    "application/json"
-                            },
-
-                            body:
-                                JSON.stringify(
-                                    registerData
-                                )
-                        }
-                    );
-
-
-                const result =
-                    await response.text();
-
-
-                console.log(
-                    "Registration response:",
-                    result
-                );
-
-
-                message.textContent =
-                    result;
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    "Registration error:",
-                    error
-                );
-
-                message.textContent =
-                    "Registration request failed.";
-            }
-
-        }
-    );
-
-
-// ======================================
-// LOAD CAPTCHA WHEN PAGE OPENS
+// START
 // ======================================
 
 loadCaptcha();
