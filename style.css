@@ -1,9 +1,11 @@
 
-* {
+ {
     box-sizing: border-box;
 }
 
+
 body {
+
     margin: 0;
 
     min-height: 100vh;
@@ -14,151 +16,277 @@ body {
 
     align-items: center;
 
-    font-family: Arial, sans-serif;
+    font-family:
+        Arial,
+        sans-serif;
 
-    background: #f0f2f5;
+    background:
+        #f0f2f5;
 }
 
+
 .container {
+
     width: 100%;
 
     padding: 20px;
 }
 
+
 .register-box {
-    max-width: 420px;
+
+    width: 100%;
+
+    max-width: 430px;
 
     margin: auto;
 
     padding: 30px;
 
-    background: white;
+    background:
+        white;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.12);
+        0 8px 30px
+        rgba(0, 0, 0, 0.12);
 }
+
 
 h1 {
+
     text-align: center;
 
-    margin: 0;
+    margin:
+        0 0 8px 0;
 
-    font-size: 30px;
+    font-size:
+        30px;
 }
+
 
 .subtitle {
+
     text-align: center;
 
-    color: #777;
+    color:
+        #777;
 
-    margin-bottom: 30px;
+    margin:
+        0 0 30px 0;
 }
+
 
 label {
-    display: block;
 
-    margin-bottom: 7px;
+    display:
+        block;
 
-    font-weight: bold;
+    margin-bottom:
+        7px;
+
+    font-weight:
+        bold;
 }
+
 
 input {
-    width: 100%;
 
-    padding: 13px;
+    width:
+        100%;
 
-    margin-bottom: 18px;
+    padding:
+        13px;
 
-    border: 1px solid #ccc;
+    margin-bottom:
+        18px;
 
-    border-radius: 8px;
+    border:
+        1px solid #ccc;
 
-    font-size: 15px;
+    border-radius:
+        8px;
+
+    font-size:
+        15px;
 }
+
 
 input:focus {
-    outline: none;
 
-    border-color: #5865f2;
+    outline:
+        none;
+
+    border-color:
+        #5865f2;
 }
+
 
 .captcha-area {
-    display: flex;
 
-    align-items: center;
+    display:
+        flex;
 
-    gap: 10px;
+    align-items:
+        center;
 
-    margin-bottom: 15px;
+    gap:
+        10px;
+
+    margin-bottom:
+        18px;
 }
+
 
 #captchaImage {
-    width: 180px;
 
-    height: 60px;
+    width:
+        220px;
 
-    object-fit: contain;
+    height:
+        70px;
 
-    border: 1px solid #ccc;
+    object-fit:
+        contain;
 
-    border-radius: 6px;
+    border:
+        1px solid #ccc;
 
-    background: #eee;
+    border-radius:
+        7px;
+
+    background:
+        #eeeeee;
 }
+
 
 #refreshCaptcha {
-    width: 50px;
 
-    height: 50px;
+    flex-shrink:
+        0;
 
-    border: none;
+    width:
+        50px;
 
-    border-radius: 8px;
+    height:
+        50px;
 
-    background: #ddd;
+    border:
+        none;
 
-    font-size: 25px;
+    border-radius:
+        8px;
 
-    cursor: pointer;
+    background:
+        #dddddd;
+
+    font-size:
+        25px;
+
+    cursor:
+        pointer;
 }
+
 
 #refreshCaptcha:hover {
-    background: #ccc;
+
+    background:
+        #cccccc;
 }
+
 
 #registerButton {
-    width: 100%;
 
-    padding: 14px;
+    width:
+        100%;
 
-    margin-top: 5px;
+    padding:
+        14px;
 
-    border: none;
+    margin-top:
+        5px;
 
-    border-radius: 8px;
+    border:
+        none;
 
-    background: #5865f2;
+    border-radius:
+        8px;
 
-    color: white;
+    background:
+        #5865f2;
 
-    font-size: 16px;
+    color:
+        white;
 
-    font-weight: bold;
+    font-size:
+        16px;
 
-    cursor: pointer;
+    font-weight:
+        bold;
+
+    cursor:
+        pointer;
 }
+
 
 #registerButton:hover {
-    background: #4752c4;
+
+    background:
+        #4752c4;
 }
 
-#message {
-    margin-top: 20px;
 
-    text-align: center;
+#registerButton:disabled {
 
-    font-weight: bold;
+    background:
+        #999;
+
+    cursor:
+        not-allowed;
 }
 
+
+.status-title {
+
+    margin-top:
+        25px;
+
+    margin-bottom:
+        7px;
+
+    font-weight:
+        bold;
+}
+
+
+.status {
+
+    min-height:
+        70px;
+
+    padding:
+        12px;
+
+    border:
+        1px solid #ddd;
+
+    border-radius:
+        8px;
+
+    background:
+        #f8f8f8;
+
+    white-space:
+        pre-wrap;
+
+    word-break:
+        break-word;
+
+    font-family:
+        monospace;
+
+    font-size:
+        13px;
+}
