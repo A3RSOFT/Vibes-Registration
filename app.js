@@ -6,7 +6,7 @@
 // API endpoints
 
 const CAPTCHA_API =
-    "http://viberschat.space:2052/api/captcha";
+    "hhttps://viberschat.space:2053/api/captcha";
 
 
 const REGISTER_API =
