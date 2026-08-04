@@ -1,102 +1,76 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Viber's Chat Registration</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="registration-box">
 
-        <div class="register-box">
+        <h1>
+            Viber's Chat
+        </h1>
 
-            <h1>Viber's Chat</h1>
+        <p>
+            Create your account
+        </p>
 
-            <p class="subtitle">
-                Create your account
-            </p>
 
-            <form id="registerForm">
+        <label>
+            CAPTCHA
+        </label>
 
-                <label for="username">
-                    Username
-                </label>
 
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Enter username"
-                    required
-                >
+        <div class="captcha-container">
 
-                <label for="password">
-                    Password
-                </label>
+            <img
+                id="captchaImage"
+                alt="CAPTCHA"
+            >
 
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Enter password"
-                    required
-                >
 
-                <label>
-                    CAPTCHA
-                </label>
-
-                <div class="captcha-area">
-
-                    <img
-                        id="captchaImage"
-                        src=""
-                        alt="CAPTCHA"
-                    >
-
-                    <button
-                        type="button"
-                        id="refreshCaptcha">
-                        ↻
-                    </button>
-
-                </div>
-
-                <input
-                    type="text"
-                    id="captchaCode"
-                    placeholder="Enter CAPTCHA"
-                    autocomplete="off"
-                    required
-                >
-
-                <button
-                    type="submit"
-                    id="registerButton">
-                    REGISTER
-                </button>
-
-            </form>
-
-            <div id="message"></div>
+            <button
+                type="button"
+                id="refreshCaptcha"
+            >
+                ↻
+            </button>
 
         </div>
 
+
+        <input
+            id="captchaCode"
+            type="text"
+            placeholder="Enter CAPTCHA"
+        >
+
+
+        <div id="message">
+            Loading...
+        </div>
+
     </div>
+
 
     <script src="app.js"></script>
 
 </body>
 
 </html>
-
