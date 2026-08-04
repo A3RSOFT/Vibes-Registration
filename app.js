@@ -215,7 +215,7 @@ async function loadCaptcha() {
         // ----------------------------------
 
         const imageUrl =
-            "https://www.viberschat.space:8443" +
+            "https://www.viberschat.space:8880" +
             "/api/captcha/images/" +
             captchaId +
             ".png";
@@ -484,6 +484,6 @@ document
 // ==========================================
 
 loadCaptcha();
-```
+
       
 
