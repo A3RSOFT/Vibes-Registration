@@ -2,84 +2,65 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>API Direct Test</title>
 
-    <title>Viber's Chat CAPTCHA API Test</title>
+    <style>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+        body {
+            margin: 0;
+            padding: 20px;
+
+            font-family: Arial, sans-serif;
+
+            background: #f0f2f5;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .box {
+            max-width: 700px;
+            margin: auto;
+
+            padding: 20px;
+
+            background: white;
+
+            border-radius: 12px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+        }
+
+    </style>
 
 </head>
 
-
 <body>
 
+<div class="box">
 
-<div class="container">
+    <h1>API Direct Test</h1>
 
+    <p>
+        The API response should appear below.
+    </p>
 
-    <div class="box">
-
-
-        <h1>
-            CAPTCHA API Test
-        </h1>
-
-
-        <p>
-            This test only gets the CAPTCHA API response.
-        </p>
-
-
-        <button
-            id="getCaptcha"
-            type="button"
-        >
-            GET CAPTCHA
-        </button>
-
-
-        <label>
-            API Response
-        </label>
-
-
-        <textarea
-            id="responseBox"
-            readonly
-            placeholder="Server response will appear here..."
-        ></textarea>
-
-
-        <label>
-            Status
-        </label>
-
-
-        <div
-            id="status"
-            class="status"
-        >
-            Waiting...
-        </div>
-
-
-    </div>
-
+    <iframe
+        src="https://viberschat.space:2053/api/captcha">
+    </iframe>
 
 </div>
-
-
-<script src="app.js"></script>
-
 
 </body>
 
