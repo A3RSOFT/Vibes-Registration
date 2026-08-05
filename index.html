@@ -12,197 +12,26 @@
 
     <title>CAPTCHA Image Test</title>
 
-    <style>
-
-        body {
-
-            margin: 0;
-
-            padding: 20px;
-
-            min-height: 100vh;
-
-            display: flex;
-
-            justify-content: center;
-
-            align-items: center;
-
-            font-family: Arial, sans-serif;
-
-            background: #f0f2f5;
-
-        }
-
-
-        .box {
-
-            width: 100%;
-
-            max-width: 500px;
-
-            padding: 30px;
-
-            background: white;
-
-            border-radius: 15px;
-
-            box-shadow:
-                0 8px 30px
-                rgba(0,0,0,0.12);
-
-            text-align: center;
-
-        }
-
-
-        h1 {
-
-            margin-top: 0;
-
-        }
-
-
-        img {
-
-            display: block;
-
-            width: 300px;
-
-            max-width: 100%;
-
-            min-height: 80px;
-
-            margin: 25px auto;
-
-            object-fit: contain;
-
-            border: 1px solid #ccc;
-
-            border-radius: 8px;
-
-            background: #eee;
-
-        }
-
-
-        button {
-
-            padding: 13px 25px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #5865f2;
-
-            color: white;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-        }
-
-
-        #status {
-
-            margin-top: 20px;
-
-            padding: 12px;
-
-            background: #f5f5f5;
-
-            border-radius: 8px;
-
-            word-break: break-all;
-
-        }
-
-    </style>
-
 </head>
 
 
 <body>
 
 
-<div class="box">
+<h1>CAPTCHA Image Test</h1>
 
 
-    <h1>
-        CAPTCHA Image Test
-    </h1>
+<p>
+    Click the link below.
+</p>
 
 
-    <p>
-        Testing the CAPTCHA image server.
-    </p>
-
-
-    <img
-        id="captchaImage"
-        src="https://www.viberschat.space:8443/api/captcha/images/35cd093b-2d5a-4d67-b54a-7a7281fd4b95.png"
-        alt="CAPTCHA"
-    >
-
-
-    <button
-        onclick="testImage()"
-    >
-        TEST IMAGE
-    </button>
-
-
-    <div id="status">
-        Loading image...
-    </div>
-
-
-</div>
-
-
-<script>
-
-const image =
-    document.getElementById(
-        "captchaImage"
-    );
-
-
-const status =
-    document.getElementById(
-        "status"
-    );
-
-
-image.onload =
-    function() {
-
-        status.textContent =
-            "SUCCESS: CAPTCHA image loaded.";
-
-    };
-
-
-image.onerror =
-    function() {
-
-        status.textContent =
-            "FAILED: CAPTCHA image could not load.";
-
-    };
-
-
-function testImage() {
-
-    status.textContent =
-        "Image URL:\n\n" +
-        image.src;
-
-}
-
-</script>
+<a
+    href="http://www.viberschat.space:8880/api/captcha/images/35cd093b-2d5a-4d67-b54a-7a7281fd4b95.png"
+    target="_blank"
+>
+    Open CAPTCHA Image
+</a>
 
 
 </body>
