@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CAPTCHA Test</title>
+    <title>Viber's Chat CAPTCHA API Test</title>
 
     <link
         rel="stylesheet"
@@ -23,39 +23,56 @@
 <body>
 
 
-<div class="box">
-
-    <h1>CAPTCHA Test</h1>
-
-    <p>
-        This page only tests CAPTCHA loading.
-    </p>
+<div class="container">
 
 
-    <div class="captcha-container">
+    <div class="box">
 
-        <img
-            id="captchaImage"
-            alt="CAPTCHA will appear here"
+
+        <h1>
+            CAPTCHA API Test
+        </h1>
+
+
+        <p>
+            This test only gets the CAPTCHA API response.
+        </p>
+
+
+        <button
+            id="getCaptcha"
+            type="button"
         >
+            GET CAPTCHA
+        </button>
+
+
+        <label>
+            API Response
+        </label>
+
+
+        <textarea
+            id="responseBox"
+            readonly
+            placeholder="Server response will appear here..."
+        ></textarea>
+
+
+        <label>
+            Status
+        </label>
+
+
+        <div
+            id="status"
+            class="status"
+        >
+            Waiting...
+        </div>
+
 
     </div>
-
-
-    <button
-        id="newCaptcha"
-        type="button"
-    >
-        GET NEW CAPTCHA
-    </button>
-
-
-    <div class="status-title">
-        Status
-    </div>
-
-
-    <pre id="status">Waiting...</pre>
 
 
 </div>
