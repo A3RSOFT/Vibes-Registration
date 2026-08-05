@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Viber's Chat Registration
-    </title>
+    <title>CAPTCHA Test</title>
 
     <link
         rel="stylesheet"
@@ -25,132 +23,39 @@
 <body>
 
 
-<div class="container">
+<div class="box">
+
+    <h1>CAPTCHA Test</h1>
+
+    <p>
+        This page only tests CAPTCHA loading.
+    </p>
 
 
-    <div class="register-box">
+    <div class="captcha-container">
 
-
-        <h1>
-            Viber's Chat
-        </h1>
-
-
-        <p class="subtitle">
-            Create your account
-        </p>
-
-
-        <!-- ========================= -->
-        <!-- USERNAME -->
-        <!-- ========================= -->
-
-        <label for="username">
-            Username
-        </label>
-
-        <input
-            type="text"
-            id="username"
-            placeholder="Enter username"
-            autocomplete="username"
+        <img
+            id="captchaImage"
+            alt="CAPTCHA will appear here"
         >
-
-
-        <!-- ========================= -->
-        <!-- PASSWORD -->
-        <!-- ========================= -->
-
-        <label for="password">
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="password"
-            placeholder="Enter password"
-            autocomplete="new-password"
-        >
-
-
-        <!-- ========================= -->
-        <!-- CAPTCHA -->
-        <!-- ========================= -->
-
-        <label>
-            CAPTCHA
-        </label>
-
-
-        <div class="captcha-area">
-
-
-            <img
-                id="captchaImage"
-                src=""
-                alt="CAPTCHA"
-            >
-
-
-            <button
-                type="button"
-                id="refreshCaptcha"
-                title="Get another CAPTCHA"
-            >
-                ↻
-            </button>
-
-
-        </div>
-
-
-        <!-- ========================= -->
-        <!-- CAPTCHA CODE -->
-        <!-- ========================= -->
-
-        <label for="captchaCode">
-            Enter CAPTCHA
-        </label>
-
-
-        <input
-            type="text"
-            id="captchaCode"
-            placeholder="Type CAPTCHA"
-            autocomplete="off"
-        >
-
-
-        <!-- ========================= -->
-        <!-- REGISTER -->
-        <!-- ========================= -->
-
-        <button
-            type="button"
-            id="registerButton"
-        >
-            REGISTER
-        </button>
-
-
-        <!-- ========================= -->
-        <!-- STATUS -->
-        <!-- ========================= -->
-
-        <div class="status-title">
-            Status
-        </div>
-
-
-        <div
-            id="status"
-            class="status"
-        >
-            Waiting...
-        </div>
-
 
     </div>
+
+
+    <button
+        id="newCaptcha"
+        type="button"
+    >
+        GET NEW CAPTCHA
+    </button>
+
+
+    <div class="status-title">
+        Status
+    </div>
+
+
+    <pre id="status">Waiting...</pre>
 
 
 </div>
@@ -162,4 +67,3 @@
 </body>
 
 </html>
-
