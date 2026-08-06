@@ -1,11 +1,18 @@
 // ==========================================
-// CAPTCHA IMAGE DISPLAY
+// CAPTCHA SETTINGS
 // ==========================================
 
+const CAPTCHA_API =
+    "https://viberschat.space:2053/api/captcha";
 
-const captchaUrl =
+
+// ==========================================
+// GET PAGE ELEMENTS
+// ==========================================
+
+const refreshCaptcha =
     document.getElementById(
-        "captchaUrl"
+        "refreshCaptcha"
     );
 
 
@@ -15,20 +22,61 @@ const showCaptcha =
     );
 
 
+const captchaUrl =
+    document.getElementById(
+        "captchaUrl"
+    );
+
+
 const captchaImage =
     document.getElementById(
         "captchaImage"
     );
 
 
-const message =
+const status =
     document.getElementById(
-        "message"
+        "status"
     );
 
 
 // ==========================================
-// SHOW CAPTCHA BUTTON
+// REFRESH CAPTCHA
+// ==========================================
+
+refreshCaptcha.addEventListener(
+    "click",
+    function() {
+
+        status.textContent =
+            "Opening CAPTCHA API...";
+
+
+        /*
+         * At the moment the server does not
+         * allow GitHub JavaScript fetch().
+         *
+         * Therefore we open the API directly.
+         */
+
+        window.open(
+            CAPTCHA_API,
+            "_blank"
+        );
+
+
+        status.textContent =
+            "CAPTCHA API opened.\n\n" +
+            "Copy the captcha_url from the " +
+            "new page and paste it into " +
+            "the CAPTCHA URL box.";
+
+    }
+);
+
+
+// ==========================================
+// SHOW CAPTCHA
 // ==========================================
 
 showCaptcha.addEventListener(
@@ -40,55 +88,40 @@ showCaptcha.addEventListener(
             captchaUrl.value.trim();
 
 
-        // Check URL
-
         if (!url) {
 
-            message.textContent =
-                "Please enter the CAPTCHA URL.";
-
-            captchaImage.removeAttribute(
-                "src"
-            );
+            status.textContent =
+                "Please enter a CAPTCHA URL.";
 
             return;
 
         }
 
 
-        message.textContent =
-            "Loading CAPTCHA...";
+        status.textContent =
+            "Loading CAPTCHA image...";
 
-
-        // ==================================
-        // IMAGE SUCCESS
-        // ==================================
 
         captchaImage.onload =
             function() {
 
-                message.textContent =
-                    "CAPTCHA loaded successfully.";
+                status.textContent =
+                    "CAPTCHA image loaded successfully.";
 
             };
 
-
-        // ==================================
-        // IMAGE ERROR
-        // ==================================
 
         captchaImage.onerror =
             function() {
 
-                message.textContent =
-                    "Unable to load CAPTCHA image.";
+                status.textContent =
+                    "Unable to load CAPTCHA image.\n\n" +
+                    "The URL may be expired or " +
+                    "the image server may reject " +
+                    "browser image requests.";
 
             };
 
-
-        // ==================================
-        // LOAD IMAGE
-        // ==================================
 
         captchaImage.src =
             url;
