@@ -1,4 +1,4 @@
-const CAPTCHA_API =
+const API =
     "http://viberschat.space:2052/api/captcha";
 
 
@@ -8,21 +8,9 @@ const refreshButton =
     );
 
 
-const showButton =
-    document.getElementById(
-        "showCaptcha"
-    );
-
-
 const captchaUrlBox =
     document.getElementById(
         "captchaUrl"
-    );
-
-
-const captchaImage =
-    document.getElementById(
-        "captchaImage"
     );
 
 
@@ -32,159 +20,101 @@ const status =
     );
 
 
-// ==========================================
-// REFRESH CAPTCHA
-// ==========================================
-
 refreshButton.addEventListener(
     "click",
     async function() {
 
         status.textContent =
-            "Requesting CAPTCHA...";
-
-
-        captchaImage.removeAttribute(
-            "src"
-        );
-
-
-        captchaUrlBox.value = "";
+            "STEP 1: Starting request...";
 
 
         try {
 
+            status.textContent =
+                "STEP 2: Calling:\n" +
+                API;
+
+
             const response =
                 await fetch(
-                    CAPTCHA_API,
+                    API,
                     {
                         method: "GET",
+                        mode: "cors",
                         cache: "no-store"
                     }
                 );
 
 
             status.textContent =
-                "HTTP Status: " +
+                "STEP 3: Server responded.\n" +
+                "HTTP status: " +
                 response.status;
 
 
-            if (!response.ok) {
-
-                throw new Error(
-                    "HTTP error " +
-                    response.status
-                );
-
-            }
-
-
-            const data =
-                await response.json();
+            const text =
+                await response.text();
 
 
             console.log(
-                "CAPTCHA API response:",
-                data
+                "SERVER RESPONSE:",
+                text
             );
 
 
-            if (
-                !data.captcha_id ||
-                !data.captcha_url
-            ) {
+            status.textContent =
+                "STEP 4: Response received:\n\n" +
+                text;
 
-                throw new Error(
-                    "CAPTCHA response does not " +
-                    "contain captcha_id/captcha_url."
-                );
+
+            try {
+
+                const data =
+                    JSON.parse(text);
+
+
+                if (
+                    data.captcha_url
+                ) {
+
+                    captchaUrlBox.value =
+                        data.captcha_url;
+
+
+                    status.textContent +=
+                        "\n\nCAPTCHA URL extracted successfully.";
+
+                }
 
             }
 
+            catch (jsonError) {
 
-            // Put the exact server URL
-            // into the textbox.
+                status.textContent +=
+                    "\n\nResponse was not JSON.";
 
-            captchaUrlBox.value =
-                data.captcha_url;
-
-
-            status.textContent =
-                "CAPTCHA URL received.\n" +
-                "CAPTCHA ID: " +
-                data.captcha_id;
-
+            }
 
         }
 
         catch (error) {
 
             console.error(
-                "CAPTCHA ERROR:",
+                "FETCH ERROR:",
                 error
             );
 
 
             status.textContent =
-                "CAPTCHA ERROR\n\n" +
-                error.message;
+                "REQUEST FAILED\n\n" +
+                error.name +
+                "\n\n" +
+                error.message +
+                "\n\n" +
+                "The browser could not read " +
+                "the CAPTCHA API response.";
 
         }
-
-    }
-);
-
-
-// ==========================================
-// SHOW CAPTCHA
-// ==========================================
-
-showButton.addEventListener(
-    "click",
-    function() {
-
-        const url =
-            captchaUrlBox.value.trim();
-
-
-        if (!url) {
-
-            status.textContent =
-                "No CAPTCHA URL.";
-
-            return;
-
-        }
-
-
-        status.textContent =
-            "Loading CAPTCHA image...";
-
-
-        captchaImage.onload =
-            function() {
-
-                status.textContent =
-                    "SUCCESS!\n\n" +
-                    "CAPTCHA image loaded.";
-
-            };
-
-
-        captchaImage.onerror =
-            function() {
-
-                status.textContent =
-                    "IMAGE ERROR.\n\n" +
-                    "The CAPTCHA URL was received, " +
-                    "but the browser could not load " +
-                    "the image.";
-
-            };
-
-
-        captchaImage.src =
-            url;
 
     }
 );
