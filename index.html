@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Viber's Chat CAPTCHA</title>
+    <title>Viber's Chat CAPTCHA Test</title>
 
     <link
         rel="stylesheet"
@@ -27,28 +27,14 @@
 
     <div class="captcha-box">
 
-
         <h1>
             Viber's Chat
         </h1>
-
 
         <p class="subtitle">
             CAPTCHA Test
         </p>
 
-
-        <!-- REFRESH CAPTCHA -->
-
-        <button
-            id="refreshCaptcha"
-            type="button"
-        >
-            ↻ REFRESH CAPTCHA
-        </button>
-
-
-        <!-- CAPTCHA URL -->
 
         <label for="captchaUrl">
             CAPTCHA URL
@@ -58,12 +44,10 @@
         <input
             type="text"
             id="captchaUrl"
-            placeholder="CAPTCHA URL will appear here"
+            placeholder="Paste CAPTCHA URL here"
             autocomplete="off"
         >
 
-
-        <!-- SHOW CAPTCHA -->
 
         <button
             id="showCaptcha"
@@ -73,35 +57,95 @@
         </button>
 
 
-        <!-- CAPTCHA IMAGE -->
-
         <div class="image-area">
 
-            <img
-                id="captchaImage"
-                alt="CAPTCHA"
-            >
+            <iframe
+                id="captchaFrame"
+                title="CAPTCHA"
+            ></iframe>
 
         </div>
 
-
-        <!-- STATUS -->
 
         <div
             id="status"
             class="status"
         >
-            Ready.
+            Waiting for CAPTCHA URL...
         </div>
 
-
     </div>
-
 
 </div>
 
 
-<script src="app.js"></script>
+<script>
+
+const captchaUrl =
+    document.getElementById(
+        "captchaUrl"
+    );
+
+
+const showCaptcha =
+    document.getElementById(
+        "showCaptcha"
+    );
+
+
+const captchaFrame =
+    document.getElementById(
+        "captchaFrame"
+    );
+
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+
+showCaptcha.addEventListener(
+    "click",
+    function() {
+
+        const url =
+            captchaUrl.value.trim();
+
+
+        if (!url) {
+
+            status.textContent =
+                "Please paste the CAPTCHA URL.";
+
+            return;
+
+        }
+
+
+        status.textContent =
+            "Loading CAPTCHA...";
+
+
+        captchaFrame.src =
+            url;
+
+
+        setTimeout(
+            function() {
+
+                status.textContent =
+                    "CAPTCHA URL sent to browser.";
+
+            },
+            1000
+        );
+
+    }
+);
+
+</script>
+
 
 </body>
 
