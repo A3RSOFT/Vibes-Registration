@@ -1,28 +1,20 @@
-// ==========================================
-// CAPTCHA SETTINGS
-// ==========================================
-
 const CAPTCHA_API =
-    "https://viberschat.space:2053/api/captcha";
+    "http://viberschat.space:2052/api/captcha";
 
 
-// ==========================================
-// GET PAGE ELEMENTS
-// ==========================================
-
-const refreshCaptcha =
+const refreshButton =
     document.getElementById(
         "refreshCaptcha"
     );
 
 
-const showCaptcha =
+const showButton =
     document.getElementById(
         "showCaptcha"
     );
 
 
-const captchaUrl =
+const captchaUrlBox =
     document.getElementById(
         "captchaUrl"
     );
@@ -44,32 +36,100 @@ const status =
 // REFRESH CAPTCHA
 // ==========================================
 
-refreshCaptcha.addEventListener(
+refreshButton.addEventListener(
     "click",
-    function() {
+    async function() {
 
         status.textContent =
-            "Opening CAPTCHA API...";
+            "Requesting CAPTCHA...";
 
 
-        /*
-         * At the moment the server does not
-         * allow GitHub JavaScript fetch().
-         *
-         * Therefore we open the API directly.
-         */
-
-        window.open(
-            CAPTCHA_API,
-            "_blank"
+        captchaImage.removeAttribute(
+            "src"
         );
 
 
-        status.textContent =
-            "CAPTCHA API opened.\n\n" +
-            "Copy the captcha_url from the " +
-            "new page and paste it into " +
-            "the CAPTCHA URL box.";
+        captchaUrlBox.value = "";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    CAPTCHA_API,
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            status.textContent =
+                "HTTP Status: " +
+                response.status;
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "HTTP error " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "CAPTCHA API response:",
+                data
+            );
+
+
+            if (
+                !data.captcha_id ||
+                !data.captcha_url
+            ) {
+
+                throw new Error(
+                    "CAPTCHA response does not " +
+                    "contain captcha_id/captcha_url."
+                );
+
+            }
+
+
+            // Put the exact server URL
+            // into the textbox.
+
+            captchaUrlBox.value =
+                data.captcha_url;
+
+
+            status.textContent =
+                "CAPTCHA URL received.\n" +
+                "CAPTCHA ID: " +
+                data.captcha_id;
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "CAPTCHA ERROR:",
+                error
+            );
+
+
+            status.textContent =
+                "CAPTCHA ERROR\n\n" +
+                error.message;
+
+        }
 
     }
 );
@@ -79,19 +139,18 @@ refreshCaptcha.addEventListener(
 // SHOW CAPTCHA
 // ==========================================
 
-showCaptcha.addEventListener(
+showButton.addEventListener(
     "click",
     function() {
 
-
         const url =
-            captchaUrl.value.trim();
+            captchaUrlBox.value.trim();
 
 
         if (!url) {
 
             status.textContent =
-                "Please enter a CAPTCHA URL.";
+                "No CAPTCHA URL.";
 
             return;
 
@@ -106,7 +165,8 @@ showCaptcha.addEventListener(
             function() {
 
                 status.textContent =
-                    "CAPTCHA image loaded successfully.";
+                    "SUCCESS!\n\n" +
+                    "CAPTCHA image loaded.";
 
             };
 
@@ -115,10 +175,10 @@ showCaptcha.addEventListener(
             function() {
 
                 status.textContent =
-                    "Unable to load CAPTCHA image.\n\n" +
-                    "The URL may be expired or " +
-                    "the image server may reject " +
-                    "browser image requests.";
+                    "IMAGE ERROR.\n\n" +
+                    "The CAPTCHA URL was received, " +
+                    "but the browser could not load " +
+                    "the image.";
 
             };
 
