@@ -1,4 +1,5 @@
-{
+css id="q5y3b1"
+* {
     box-sizing: border-box;
 }
 
@@ -58,20 +59,16 @@ h1 {
 
     text-align: center;
 
-    font-size: 30px;
-
 }
 
 
 .subtitle {
 
-    margin-top: 8px;
-
-    margin-bottom: 30px;
-
     text-align: center;
 
     color: #777;
+
+    margin-bottom: 25px;
 
 }
 
@@ -79,8 +76,6 @@ h1 {
 label {
 
     display: block;
-
-    margin-top: 20px;
 
     margin-bottom: 7px;
 
@@ -129,43 +124,32 @@ button {
 }
 
 
-button:hover {
-
-    background: #4752c4;
-
-}
-
-
 .image-area {
 
     width: 100%;
 
-    min-height: 100px;
+    height: 180px;
 
     margin-top: 20px;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
 
     border: 1px solid #ccc;
 
     border-radius: 8px;
+
+    overflow: hidden;
 
     background: #f5f5f5;
 
 }
 
 
-#captchaImage {
+#captchaFrame {
 
-    max-width: 100%;
+    width: 100%;
 
-    max-height: 160px;
+    height: 100%;
 
-    object-fit: contain;
+    border: none;
 
 }
 
@@ -176,9 +160,9 @@ button:hover {
 
     padding: 12px;
 
-    border-radius: 8px;
-
     background: #f5f5f5;
+
+    border-radius: 8px;
 
     text-align: center;
 
