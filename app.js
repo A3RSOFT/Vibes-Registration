@@ -1,148 +1,97 @@
 // ==========================================
-// CAPTCHA API TEST
+// CAPTCHA IMAGE DISPLAY
 // ==========================================
 
 
-// API endpoint
-
-const CAPTCHA_API =
-    "https://viberschat.space:2053/api/captcha";
-
-
-// Elements
-
-const getCaptchaButton =
+const captchaUrl =
     document.getElementById(
-        "getCaptcha"
+        "captchaUrl"
     );
 
 
-const responseBox =
+const showCaptcha =
     document.getElementById(
-        "responseBox"
+        "showCaptcha"
     );
 
 
-const statusBox =
+const captchaImage =
     document.getElementById(
-        "status"
+        "captchaImage"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
     );
 
 
 // ==========================================
-// GET CAPTCHA API RESPONSE
+// SHOW CAPTCHA BUTTON
 // ==========================================
 
-async function getCaptcha() {
+showCaptcha.addEventListener(
+    "click",
+    function() {
 
 
-    responseBox.value = "";
+        const url =
+            captchaUrl.value.trim();
 
 
-    statusBox.textContent =
-        "Connecting to CAPTCHA API...";
+        // Check URL
 
+        if (!url) {
 
-    console.log(
-        "Requesting:",
-        CAPTCHA_API
-    );
+            message.textContent =
+                "Please enter the CAPTCHA URL.";
 
-
-    try {
-
-
-        // ==================================
-        // SEND GET REQUEST
-        // ==================================
-
-        const response =
-            await fetch(
-                CAPTCHA_API,
-                {
-                    method:
-                        "GET",
-
-                    cache:
-                        "no-store"
-                }
+            captchaImage.removeAttribute(
+                "src"
             );
 
+            return;
 
-        console.log(
-            "HTTP status:",
-            response.status
-        );
+        }
 
 
-        console.log(
-            "Response URL:",
-            response.url
-        );
+        message.textContent =
+            "Loading CAPTCHA...";
 
 
         // ==================================
-        // GET RAW RESPONSE
+        // IMAGE SUCCESS
         // ==================================
 
-        const text =
-            await response.text();
+        captchaImage.onload =
+            function() {
 
+                message.textContent =
+                    "CAPTCHA loaded successfully.";
 
-        console.log(
-            "Raw response:",
-            text
-        );
+            };
 
 
         // ==================================
-        // SHOW COMPLETE RESPONSE
+        // IMAGE ERROR
         // ==================================
 
-        responseBox.value =
-            text;
+        captchaImage.onerror =
+            function() {
+
+                message.textContent =
+                    "Unable to load CAPTCHA image.";
+
+            };
 
 
-        statusBox.textContent =
-            "SUCCESS\n\n" +
-            "HTTP Status: " +
-            response.status;
+        // ==================================
+        // LOAD IMAGE
+        // ==================================
 
+        captchaImage.src =
+            url;
 
     }
-
-
-    catch (error) {
-
-
-        console.error(
-            "FETCH ERROR:",
-            error
-        );
-
-
-        responseBox.value =
-            "REQUEST FAILED\n\n" +
-            error.toString();
-
-
-        statusBox.textContent =
-            "FAILED TO FETCH\n\n" +
-            error.message +
-            "\n\n" +
-            "The browser could not read the API response.";
-
-    }
-
-}
-
-
-// ==========================================
-// BUTTON
-// ==========================================
-
-getCaptchaButton
-    .addEventListener(
-        "click",
-        getCaptcha
-    );
+);
