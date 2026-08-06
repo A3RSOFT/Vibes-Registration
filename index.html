@@ -10,7 +10,12 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>CAPTCHA Image Test</title>
+    <title>Viber's Chat CAPTCHA</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -18,21 +23,85 @@
 <body>
 
 
-<h1>CAPTCHA Image Test</h1>
+<div class="container">
+
+    <div class="captcha-box">
 
 
-<p>
-    Click the link below.
-</p>
+        <h1>
+            Viber's Chat
+        </h1>
 
 
-<a
-    href="http://www.viberschat.space:8880/api/captcha/images/3b1c0a23-2b1a-4ef9-b061-9c03ba0d8636.png"
-    target="_blank"
->
-    Open CAPTCHA Image
-</a>
+        <p class="subtitle">
+            CAPTCHA Test
+        </p>
 
+
+        <!-- REFRESH CAPTCHA -->
+
+        <button
+            id="refreshCaptcha"
+            type="button"
+        >
+            ↻ REFRESH CAPTCHA
+        </button>
+
+
+        <!-- CAPTCHA URL -->
+
+        <label for="captchaUrl">
+            CAPTCHA URL
+        </label>
+
+
+        <input
+            type="text"
+            id="captchaUrl"
+            placeholder="CAPTCHA URL will appear here"
+            autocomplete="off"
+        >
+
+
+        <!-- SHOW CAPTCHA -->
+
+        <button
+            id="showCaptcha"
+            type="button"
+        >
+            SHOW CAPTCHA
+        </button>
+
+
+        <!-- CAPTCHA IMAGE -->
+
+        <div class="image-area">
+
+            <img
+                id="captchaImage"
+                alt="CAPTCHA"
+            >
+
+        </div>
+
+
+        <!-- STATUS -->
+
+        <div
+            id="status"
+            class="status"
+        >
+            Ready.
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script src="app.js"></script>
 
 </body>
 
