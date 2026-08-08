@@ -8,9 +8,21 @@ const refreshButton =
     );
 
 
+const showButton =
+    document.getElementById(
+        "showCaptcha"
+    );
+
+
 const captchaUrlBox =
     document.getElementById(
         "captchaUrl"
+    );
+
+
+const captchaImage =
+    document.getElementById(
+        "captchaImage"
     );
 
 
@@ -115,6 +127,54 @@ refreshButton.addEventListener(
                 "the CAPTCHA API response.";
 
         }
+
+    }
+);
+
+
+showButton.addEventListener(
+    "click",
+    function() {
+
+        const captchaUrl =
+            captchaUrlBox.value.trim();
+
+        if (!captchaUrl) {
+
+            status.textContent =
+                "ERROR: No CAPTCHA URL provided.\n\n" +
+                "Click REFRESH CAPTCHA first or paste a URL.";
+
+            return;
+
+        }
+
+        status.textContent =
+            "Loading CAPTCHA image...";
+
+        captchaImage.onload = function() {
+
+            status.textContent =
+                "SUCCESS: CAPTCHA image loaded!";
+
+        };
+
+        captchaImage.onerror = function() {
+
+            status.textContent =
+                "FAILED: Could not load CAPTCHA image.\n\n" +
+                "URL: " + captchaUrl + "\n\n" +
+                "The image may be blocked by CORS policy " +
+                "or the URL may be invalid.";
+
+            console.error(
+                "Image load error for URL:",
+                captchaUrl
+            );
+
+        };
+
+        captchaImage.src = captchaUrl;
 
     }
 );
